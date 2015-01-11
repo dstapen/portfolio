@@ -1,0 +1,60 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<beans xmlns='http://www.springframework.org/schema/beans'
+       xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+       xmlns:mvc='http://www.springframework.org/schema/mvc'
+       xmlns:p='http://www.springframework.org/schema/p'
+       xmlns:context='http://www.springframework.org/schema/context'
+       xsi:schemaLocation='http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
+                           http://www.springframework.org/schema/context
+                           http://www.springframework.org/schema/context/spring-context-4.1.xsd
+                           http://www.springframework.org/schema/mvc
+                           http://www.springframework.org/schema/mvc/spring-mvc-4.1.xsd'>
+
+
+
+    <context:component-scan base-package='com.dstapen.portfolio.todo'/>
+
+
+
+    <mvc:annotation-driven/>
+
+    <!--<bean class='com.dstapen.portfolio.todo.management.MyTask'/>-->
+
+    <!--<bean class='com.dstapen.portfolio.todo.management.ManagementActivator'-->
+          <!--init-method='activate'-->
+          <!--destroy-method='deactivate'/>-->
+
+
+    <!--<bean id="myTask" class="com.dstapen.portfolio.todo.management.MyTask"/>-->
+    <!--<bean class="org.springframework.jmx.export.MBeanExporter"-->
+          <!--lazy-init="false">-->
+        <!--<property name="beans">-->
+            <!--<map>-->
+                <!--<entry key="bean:name=MyTaskMBean" value-ref="myTask"/>-->
+            <!--</map>-->
+        <!--</property>-->
+    <!--</bean>-->
+
+    <!--<bean id="todoController" class="com.dstapen.portfolio.todo.todo.DefaultTodoController"/>-->
+    <!--<bean class="org.springframework.jmx.export.MBeanExporter"-->
+          <!--lazy-init="false">-->
+        <!--<property name="beans">-->
+            <!--<map>-->
+                <!--<entry key="bean:name=TodoControllerMBean" value-ref="todoController"/>-->
+            <!--</map>-->
+        <!--</property>-->
+    <!--</bean>-->
+
+
+    <!--mvc:annotation-driven>
+        <mvc:message-converters>
+            <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"/>
+        </mvc:message-converters>
+    </mvc:annotation-driven-->
+
+    <!--bean class='com.dpimkin.Marker'/-->
+    <!-- Declare a view resolver -->
+    <!--bean id='jspViewResolver' class='org.springframework.web.servlet.view.InternalResourceViewResolver'
+          p:prefix='/WEB-INF/jsp/' p:suffix='.jsp' p:order='1'/-->
+</beans>
