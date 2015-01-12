@@ -43,7 +43,7 @@ angular.module('todomvc')
 
 				angular.copy(incompleteTodos, store.todos);
 
-				return $http.delete('/api/todos')
+				return $http.delete('/api/todos/completed')
 					.then(function success() {
 						return store.todos;
 					}, function error() {
@@ -107,21 +107,7 @@ angular.module('todomvc')
 	.factory('localStorage', function ($q, $http) {
 		'use strict';
 
-		var STORAGE_ID = 'todos-angularjs';
-
 		var store = {
-			todos: [],
-
-			_getFromLocalStorage: function () {
-                var output = JSON.parse(localStorage.getItem(STORAGE_ID) || '[]');
-                console.log('_getFromLocalStorage', 'output', output);
-				return output;
-			},
-
-			_saveToLocalStorage: function (todos) {
-                console.log('_saveToLocalStorage', 'input', todos );
-				localStorage.setItem(STORAGE_ID, JSON.stringify(todos));
-			},
 
             fetch: function() {
                 return $http({
@@ -131,23 +117,26 @@ angular.module('todomvc')
             },
 
 			clearCompleted: function () {
-				var deferred = $q.defer();
+                var originalTodos = store.todos.slice(0);
 
-				var completeTodos = [], incompleteTodos = [];
-				store.todos.forEach(function (todo) {
-					if (todo.completed) {
-						completeTodos.push(todo);
-					} else {
-						incompleteTodos.push(todo);
-					}
-				});
+                var completeTodos = [], incompleteTodos = [];
+                store.todos.forEach(function (todo) {
+                    if (todo.completed) {
+                        completeTodos.push(todo);
+                    } else {
+                        incompleteTodos.push(todo);
+                    }
+                });
 
-				angular.copy(incompleteTodos, store.todos);
+                angular.copy(incompleteTodos, store.todos);
 
-				store._saveToLocalStorage(store.todos);
-				deferred.resolve(store.todos);
-
-				return deferred.promise;
+                return $http.delete('api/todos/completed')
+                    .then(function success() {
+                        return store.todos;
+                    }, function error() {
+                        angular.copy(originalTodos, store.todos);
+                        return originalTodos;
+                    });
 			},
 
 			delete: function (todo) {

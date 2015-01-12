@@ -67,6 +67,7 @@ public class DefaultTodoController {
     }
 
     @ResponseBody
+    @RequestMapping(method = DELETE, value = "completed")
     @ResponseStatus(OK)
     public List<Task> clearCompleted(Principal principal) throws Exception {
         return service.clearCompleted(principal.getName());
